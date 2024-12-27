@@ -19,5 +19,7 @@ if vim.g.neovide then
 	vim.o.guifont = "JetBrainsMono Nerd Font:h14"
 end
 
+vim.api.nvim_set_keymap("t", "<Esc><Esc>", "<C-\\><C-n>" ,{noremap = true})
+
 require "lazy_setup"
 require "polish"
