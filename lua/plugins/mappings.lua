@@ -5,9 +5,12 @@ return {
     opts = {
       mappings={
         n = {
-          -- Utils
+          -- INFO: Movements
+					["s"] = {"<Cmd>HopWord<Cr>", desc = "hop around the file"},
+					["S"] = {"<Cmd>HopNode<Cr>", desc = "Hop around the nodes in a file"},
+          -- INFO: Utils
           ["<Leader><Leader>x"] = {":source %<CR>", desc="Source current file"},
-          -- AI 
+          -- INFO: AI 
           ["<Leader>a"] = { desc = "AI" },
           ["<Leader>aa"] = { function()
             vim.cmd("CodeCompanion")
