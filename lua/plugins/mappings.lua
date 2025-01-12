@@ -7,9 +7,10 @@ return {
         n = {
           -- INFO: Movements
 					["s"] = {"<Cmd>HopWord<Cr>", desc = "hop around the file"},
-					["S"] = {"<Cmd>HopNode<Cr>", desc = "Hop around the nodes in a file"},
+					["S"] = {"<Cmd>HopChar1<Cr>", desc = "Hop around with only one char"},
           -- INFO: Utils
           ["<Leader><Leader>x"] = {":source %<CR>", desc="Source current file"},
+          ["<Leader><Leader>f"] = {"<Cmd>Oil<CR>", desc="File manager using oil.nvim"},
           -- INFO: AI 
           ["<Leader>a"] = { desc = "AI" },
           ["<Leader>aa"] = { function()
@@ -19,7 +20,7 @@ return {
           },
           ["<Leader>ac"] = {
           function()
-          vim.cmd("CodeCompanionChat")
+            vim.cmd("CodeCompanionChat")
           end,
           desc = "Chat with AI"
           },
