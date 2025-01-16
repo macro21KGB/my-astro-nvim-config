@@ -20,7 +20,7 @@ return {
 					},
           -- INFO: Utils
           ["<Leader><Leader>x"] = {":source %<CR>", desc="Source current file"},
-          ["<Leader><Leader>f"] = {"<Cmd>Oil<CR>", desc="File manager using oil.nvim"},
+          ["<Leader>fF"] = {"<Cmd>Oil<CR>", desc="File manager using oil.nvim"},
           -- INFO: AI 
           ["<Leader>a"] = { desc = "AI" },
           ["<Leader>aa"] = { function()
