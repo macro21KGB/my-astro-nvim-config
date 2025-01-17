@@ -21,5 +21,6 @@ end
 
 vim.api.nvim_set_keymap("t", "jk", "<C-\\><C-n>" ,{noremap = true})
 
+require "scripts"
 require "lazy_setup"
 require "polish"
