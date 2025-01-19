@@ -19,8 +19,10 @@ return {
             end
 					},
           -- INFO: Utils
-          ["<Leader><Leader>x"] = {":source %<CR>", desc="Source current file"},
-          ["<Leader>fF"] = {":lua MiniFiles.open()<CR>", desc="File manager using oil.nvim"},
+          ["<Leader>fF"] = {":lua MiniFiles.open()<CR>", desc="File Manager using mini.files"},
+          ["<Leader>w"] = {":w<CR>:source<CR>", desc="Save and source the file"},
+          -- INFO: AI
+          ["<Leader>a"] = { desc = "AI" }
         }
       }
    },

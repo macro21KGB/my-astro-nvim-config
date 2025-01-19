@@ -19,7 +19,8 @@ if vim.g.neovide then
 	vim.o.guifont = "JetBrainsMono Nerd Font:h14"
 end
 
-vim.api.nvim_set_keymap("t", "jk", "<C-\\><C-n>" ,{noremap = true})
+vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
+
 
 require "scripts"
 require "lazy_setup"
