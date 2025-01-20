@@ -2,7 +2,7 @@ return {
   {
     "macro21KGB/simple-weather.nvim",
     opts = {
-      city = "Napoli",
+      city = "Portici",
       lang = "it"
     }
   }
