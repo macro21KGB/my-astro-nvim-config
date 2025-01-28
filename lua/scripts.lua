@@ -5,7 +5,6 @@ function M.obsidian_convert()
   local status, err = pcall(function()
     -- Get the current buffer
     local buf = vim.api.nvim_get_current_buf()
-    
     -- Check if current buffer is a markdown file
     local ft = vim.bo[buf].filetype
     if ft ~= 'markdown' then
