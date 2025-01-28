@@ -1,7 +1,7 @@
 local M = {}
 
 -- Function to convert Obsidian math notation
-M.obsidian_convert = function()
+function M.obsidian_convert()
   local status, err = pcall(function()
     -- Get the current buffer
     local buf = vim.api.nvim_get_current_buf()
