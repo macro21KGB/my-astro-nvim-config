@@ -24,7 +24,6 @@ return {
         path = "~/Desktop/progetti/ObsidianNotes/",
       },
     },
-
-    -- see below for full list of options 👇
+    disable_frontmatter = true
   },
 }
