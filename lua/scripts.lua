@@ -1,4 +1,6 @@
-function ObsidianConvert()
+local M = {}
+
+function M.obsidian_convert()
   -- Get the current buffer
   local buf = vim.api.nvim_get_current_buf()
   -- Get all lines from the buffer
@@ -13,3 +15,5 @@ function ObsidianConvert()
   -- Set the modified lines back to the buffer
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end
+
+return M
