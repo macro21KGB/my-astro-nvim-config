@@ -5,6 +5,13 @@ function M.obsidian_convert()
   local status, err = pcall(function()
     -- Get the current buffer
     local buf = vim.api.nvim_get_current_buf()
+    
+    -- Check if current buffer is a markdown file
+    local ft = vim.bo[buf].filetype
+    if ft ~= 'markdown' then
+      vim.notify("Current buffer is not a markdown file", vim.log.levels.WARN)
+      return
+    end
     -- Get all lines from the buffer
     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
     -- Process each line
