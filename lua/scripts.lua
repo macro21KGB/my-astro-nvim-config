@@ -12,6 +12,8 @@ function M.obsidian_convert()
       -- Replace \( with $ and \) with $
       line = line:gsub("\\%(", "$")
       line = line:gsub("\\%)", "$")
+      line = line:gsub("\\%]", "$$")
+      line = line:gsub("\\%[", "$$")
       lines[i] = line
     end
     -- Set the modified lines back to the buffer
