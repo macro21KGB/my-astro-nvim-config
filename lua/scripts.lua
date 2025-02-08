@@ -34,7 +34,7 @@ end
 
 function M.open_aider()
   local current_folder = vim.fn.getcwd()
-  vim.cmd('4TermExec cmd="aider --deepseek --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
+  vim.cmd('4TermExec cmd="aider --model openrouter/google/gemini-2.0-flash-001 --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
 end
 
 -- Create a user command for easier access
