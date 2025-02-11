@@ -37,6 +37,44 @@ function M.open_aider()
   vim.cmd('4TermExec cmd="aider --model openrouter/google/gemini-2.0-flash-001 --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
 end
 
+function M.obsidian_create_toc()
+    local buf = vim.api.nvim_get_current_buf()
+  local ft = vim.bo[buf].filetype
+  if ft ~= 'markdown' then
+    vim.notify("Current buffer is not a markdown file", vim.log.levels.WARN)
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local toc = {}
+  local toc_string = ""
+
+  for i, line in ipairs(lines) do
+    local heading_level = string.match(line, "^(#+)")
+    if heading_level then
+      local level = string.len(heading_level)
+      local heading_text = string.sub(line, level + 2)
+      local link = heading_text:gsub("%s", "-"):lower()
+      table.insert(toc, { level = level, text = heading_text, link = link })
+    end
+  end
+
+  if #toc > 0 then
+    toc_string = "## Table of Contents\n"
+    for _, heading in ipairs(toc) do
+      local indent = string.rep("  ", heading.level - 1)
+      toc_string = toc_string .. indent .. "* [[#" .. heading.text .. "]]\n"
+    end
+    toc_string = toc_string .. "\n"
+    -- Insert the TOC at the cursor position
+    local current_line = vim.api.nvim_win_get_cursor(0)[1] - 1
+    vim.api.nvim_buf_set_lines(buf, current_line, current_line, false, vim.split(toc_string, "\n"))
+    vim.notify("Table of Contents created")
+  else
+    vim.notify("No headings found in the current buffer", vim.log.levels.WARN)
+  end
+end
+
 -- Create a user command for easier access
 vim.api.nvim_create_user_command('ObsidianConvert', function()
   M.obsidian_convert()
@@ -44,5 +82,9 @@ end, {})
 
 vim.api.nvim_create_user_command('OpenAider', function()
   M.open_aider()
+end, {})
+
+vim.api.nvim_create_user_command('ObsidianCreateToc', function()
+  M.obsidian_create_toc()
 end, {})
 return M
