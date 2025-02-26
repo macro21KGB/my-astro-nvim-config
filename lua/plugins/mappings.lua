@@ -21,8 +21,6 @@ return {
           -- INFO: Utils
           ["<Leader>fF"] = {":lua MiniFiles.open()<CR>", desc="File Manager using mini.files"},
           ["<Leader>w"] = {":w<CR>:source<CR>", desc="Save and source the file"},
-          -- INFO: AI
-          ["<Leader>a"] = { desc = "AI" }
         }
       }
    },
