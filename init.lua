@@ -16,12 +16,21 @@ if not pcall(require, "lazy") then
 end
 
 if vim.g.neovide then
-	vim.o.guifont = "JetBrainsMono Nerd Font:h14"
+	vim.o.guifont = "Hack Nerd Font:h12"
+  vim.g.neovide_opacity = 0.9
+  vim.g.neovide_normal_opacity = 0.9
+
+  vim.g.neovide_title_background_color = string.format(
+      "%x",
+      vim.api.nvim_get_hl(0, {id=vim.api.nvim_get_hl_id_by_name("Normal")}).bg
+  )
+  vim.g.neovide_title_text_color = "pink"
 end
+
 
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
 
 
-require "scripts"
+-- require "scripts"
 require "lazy_setup"
 require "polish"
