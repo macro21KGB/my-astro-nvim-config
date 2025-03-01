@@ -20,6 +20,7 @@ return {
 					},
           -- INFO: Utils
           ["<Leader>fF"] = {":lua MiniFiles.open()<CR>", desc="File Manager using mini.files"},
+          ["<Leader>ff"] = {" :lua MiniPick.builtin.files({tool = 'git'})<CR>", desc="Telescope-like mini pick"},
           ["<Leader>w"] = {":w<CR>:source<CR>", desc="Save and source the file"},
         }
       }
