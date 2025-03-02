@@ -34,7 +34,7 @@ end
 
 function M.open_aider()
   local current_folder = vim.fn.getcwd()
-  vim.cmd('4TermExec cmd="aider --model openrouter/google/gemini-2.0-flash-001 --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
+  vim.cmd('4TermExec cmd="aider --editor-model openrouter/google/gemini-2.0-flash-001 --model openrouter/google/gemini-2.0-flash-001 --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
 end
 
 function M.obsidian_create_toc()
@@ -75,6 +75,30 @@ function M.obsidian_create_toc()
   end
 end
 
+-- Function to convert SRT to TXT
+function M.srt_to_txt()
+  local buf = vim.api.nvim_get_current_buf()
+  local ft = vim.bo[buf].filetype
+  if ft ~= 'srt' then
+    vim.notify("Current buffer is not an SRT file", vim.log.levels.WARN)
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local txt_lines = {}
+
+  for _, line in ipairs(lines) do
+    -- Skip lines that are numbers or timestamps
+    if not line:match("^%d+$") and not line:match("^%d%d:%d%d:%d%d") then
+      table.insert(txt_lines, line)
+    end
+  end
+
+  -- Set the converted lines back to the buffer
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, txt_lines)
+  vim.notify("SRT converted to TXT")
+end
+
 -- Create a user command for easier access
 vim.api.nvim_create_user_command('ObsidianConvert', function()
   M.obsidian_convert()
@@ -87,4 +111,9 @@ end, {})
 vim.api.nvim_create_user_command('ObsidianCreateToc', function()
   M.obsidian_create_toc()
 end, {})
+
+vim.api.nvim_create_user_command('SrtToTxt', function()
+  M.srt_to_txt()
+end, {})
+
 return M

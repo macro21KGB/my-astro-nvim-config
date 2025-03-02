@@ -24,13 +24,12 @@ if vim.g.neovide then
       "%x",
       vim.api.nvim_get_hl(0, {id=vim.api.nvim_get_hl_id_by_name("Normal")}).bg
   )
-  vim.g.neovide_title_text_color = "pink"
 end
 
 
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
 
 
--- require "scripts"
+require "scripts"
 require "lazy_setup"
 require "polish"
