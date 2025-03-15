@@ -34,7 +34,7 @@ end
 
 function M.open_aider()
   local current_folder = vim.fn.getcwd()
-  vim.cmd('4TermExec cmd="aider --editor-model openrouter/google/gemini-2.0-flash-001 --model openrouter/google/gemini-2.0-flash-001 --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
+  vim.cmd('4TermExec cmd="aider --editor-model openrouter/google/gemini-2.0-flash-001 --architect --model openrouter/anthropic/claude-3.7-sonnet --no-auto-lint --watch-files" size=50 dir=' .. current_folder .. ' direction=vertical')
 end
 
 function M.obsidian_create_toc()
