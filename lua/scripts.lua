@@ -98,22 +98,85 @@ function M.srt_to_txt()
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, txt_lines)
   vim.notify("SRT converted to TXT")
 end
-
 -- Create a user command for easier access
-vim.api.nvim_create_user_command('ObsidianConvert', function()
-  M.obsidian_convert()
-end, {})
+  vim.api.nvim_create_user_command('ObsidianConvert', function()
+    M.obsidian_convert()
+  end, {})
 
-vim.api.nvim_create_user_command('OpenAider', function()
-  M.open_aider()
-end, {})
+  vim.api.nvim_create_user_command('OpenAider', function()
+    M.open_aider()
+  end, {})
 
-vim.api.nvim_create_user_command('ObsidianCreateToc', function()
-  M.obsidian_create_toc()
-end, {})
+  vim.api.nvim_create_user_command('ObsidianCreateToc', function()
+    M.obsidian_create_toc()
+  end, {})
 
-vim.api.nvim_create_user_command('SrtToTxt', function()
-  M.srt_to_txt()
-end, {})
+  vim.api.nvim_create_user_command('SrtToTxt', function()
+    M.srt_to_txt()
+  end, {})
+
+  vim.api.nvim_create_user_command('RaylibRun', function()
+    M.run_raylib()
+  end, {})
+
+function M.run_raylib()
+  -- Execute the command silently and capture output
+  local status, output = pcall(vim.fn.system, "make run")
+
+  if not status then
+    vim.notify("Error running 'make run': " .. tostring(output), vim.log.levels.ERROR)
+    return
+  end
+
+  local buf = nil
+  local raylib_buf_name = '[raylib output]'
+
+  -- Check if a buffer with the name [raylib output] already exists
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_valid(b) and vim.api.nvim_buf_get_name(b) == raylib_buf_name then
+      buf = b
+      -- Clear existing content
+      vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})
+      break
+    end
+  end
+
+  -- If no existing buffer found, create a new one
+  if buf == nil then
+    buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(buf, 'bufhidden', 'wipe')
+    vim.api.nvim_buf_set_option(buf, 'swapfile', false)
+    vim.api.nvim_buf_set_option(buf, 'buftype', 'nofile')
+    vim.api.nvim_buf_set_name(buf, raylib_buf_name)
+  end
+
+  -- Set the output to the buffer
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(output, '\n'))
+
+  -- Find or create a window for the buffer
+  local win = nil
+  for _, w in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_buf(w) == buf then
+      win = w
+      break
+    end
+  end
+
+  if win == nil then
+    vim.cmd('split')
+    win = vim.api.nvim_get_current_win()
+  end
+
+  vim.api.nvim_win_set_buf(win, buf);
+  vim.api.nvim_win_set_option(win, 'wrap', false);
+
+  vim.notify("Raylib app executed. Output in [raylib output] buffer.", vim.log.levels.INFO)
+end
+
+
+vim.keymap.set("n", "<Leader>r", "" ,{desc="Raylib Utils"})
+vim.keymap.set("n", "<Leader>rr", function()
+  M.run_raylib()
+end, {desc = "Run raylib with make and show output"})
 
 return M
