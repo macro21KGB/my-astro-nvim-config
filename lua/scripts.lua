@@ -7,8 +7,6 @@ local function map(tbl, func)
     return new_tbl
 end
 
-print(map)
-
 ---@param method string The method of the request
 ---@param url string The url to send the request
 function SendHttpRequest(method, url, headers, body)
@@ -31,8 +29,6 @@ function SendHttpRequest(method, url, headers, body)
 
   -- Add the URL
   curl_cmd = curl_cmd .. vim.fn.shellescape(url) -- Properly escape the URL
-
-  print("Executing command: " .. curl_cmd)
 
   -- Execute the curl command and capture its output
   local success, result = pcall(vim.fn.system, curl_cmd)
