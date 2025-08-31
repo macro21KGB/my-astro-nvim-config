@@ -8,3 +8,5 @@ require("mini.pick").setup()
 -- Text editing
 require("mini.move").setup()
 require("mini.operators").setup()
+
+require("memos").setup()
