@@ -1,12 +1,3 @@
-
-local function map(tbl, func)
-    local new_tbl = {}
-    for k, v in pairs(tbl) do
-        new_tbl[k] = func(v)
-    end
-    return new_tbl
-end
-
 ---@param method string The method of the request
 ---@param url string The url to send the request
 function SendHttpRequest(method, url, headers, body)
@@ -41,29 +32,4 @@ function SendHttpRequest(method, url, headers, body)
     error("Failed to execute curl: " .. result)
   end
 end
-
-vim.api.nvim_create_user_command("SelectBuffer", function()
-  local buffers = {}
-for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-  if vim.api.nvim_buf_is_loaded(bufnr) and vim.api.nvim_buf_get_name(bufnr) ~= "" then
-    local bufname = vim.api.nvim_buf_get_name(bufnr)
-    -- print(string.format("Buffer %d: %s", bufnr, bufname))
-      table.insert(buffers, {bufname=bufname, bufnr=bufnr})
-  end
-
-end
-  local buffers_names = map(buffers, function(buffer)
-    return buffer.bufname
-  end)
-
-  local selected = require("mini.pick").start({source={items=buffers_names}})
-
-  vim.api.nvim_command("b " .. selected)
-
-end, {nargs = 0})
-
-
-vim.keymap.set("n", "<leader>bf", ":SelectBuffer<CR>", {
-  desc= "Select buffer to jump"
-})
 
