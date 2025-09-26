@@ -10,7 +10,7 @@ local plugins = {
   "astrocore",
   "astroui",
   "mini.nvim",
-  "hop.nvim",
+  "leap.nvim",
   "nvim-autopairs",
   "nvim-treesitter",
   "nvim-ts-autotag",
