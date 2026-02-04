@@ -10,4 +10,3 @@ require("mini.move").setup()
 require("mini.operators").setup()
 
 require("memos").setup()
-require('leap').set_default_mappings()
