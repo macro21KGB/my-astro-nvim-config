@@ -26,9 +26,7 @@ if vim.g.neovide then
   )
 end
 
-
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
-
 
 require "scripts"
 require "lazy_setup"
