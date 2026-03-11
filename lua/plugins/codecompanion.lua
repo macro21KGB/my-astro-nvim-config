@@ -1,6 +1,13 @@
 return {
   "olimorris/codecompanion.nvim",
   opts = {
+    prompt_library = {
+      markdown = {
+        dirs = {
+          "~/.config/nvim/prompts/",
+        },
+      }
+    },
     extensions = {
       mcphub = {
           callback = "mcphub.extensions.codecompanion",
