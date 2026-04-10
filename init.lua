@@ -28,6 +28,7 @@ end
 
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
 
+require("typst_utils").setup()
 require "scripts"
 require "lazy_setup"
 require "polish"
