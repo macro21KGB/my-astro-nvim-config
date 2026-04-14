@@ -48,10 +48,29 @@ function M.create_section()
   end
 end
 
+function M.download_image(url, save_path)
+  vim.system({"curl", "-L", "-o", save_path, url}, {
+    detach = true,
+  })
+end
 
 function M.setup()
   vim.keymap.set('n', '  tc', M.typst_watch, { silent = true, desc = 'Compile Typst document on write' })
   vim.keymap.set('n', '  tr', M.typst_view_pdf, { silent = true, desc = 'View Typst PDF' })
+  vim.keymap.set('n', '  td', function()
+
+    local url = vim.fn.input('Image URL: ')
+    if url ~= '' then
+      local filename = vim.fn.fnamemodify(url, ':t')
+      local save_path = 'images/' .. filename
+      M.download_image(url, save_path)
+      -- Insert an image include statement in the current file
+      local include_statement = '#image("' .. save_path .. '")'
+      vim.api.nvim_put({ include_statement }, 'l', true, true)
+    end
+
+  end,
+  { silent = true, desc = 'Download images to images/' })
   vim.keymap.set('v', '  ts', M.create_section, { silent = true, desc = 'Create a new section from selection' })
 end
 
