@@ -63,7 +63,8 @@ function M.setup()
       if not url then return end
       if url ~= '' then
         local filename = vim.fn.fnamemodify(url, ':t')
-        local save_path = 'images/' .. filename
+        local abs_path = "~/Documenti/Tesi/images/"
+        local save_path = abs_path .. filename
         M.download_image(url, save_path)
         -- Insert an image include statement in the current file
         local include_statement = '#image("' .. save_path .. '")'

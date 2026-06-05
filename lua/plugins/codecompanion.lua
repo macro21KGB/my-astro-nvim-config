@@ -4,7 +4,7 @@ return {
     prompt_library = {
       markdown = {
         dirs = {
-          "~/.config/nvim/prompts/",
+          "/home/mario/.config/nvim/prompts",
         },
       }
     },

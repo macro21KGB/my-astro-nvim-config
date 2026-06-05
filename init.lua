@@ -28,6 +28,17 @@ end
 
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { noremap = true })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.typ" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.textwidth = 0 -- or a specific width like 80
+    vim.opt_local.wrapmargin = 0
+  end,
+  desc = "Soft wrap for .typ files",
+})
+
 require("typst_utils").setup()
 require "scripts"
 require "lazy_setup"
