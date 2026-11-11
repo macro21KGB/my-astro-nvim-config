@@ -22,15 +22,17 @@ return {
     adapters = {
       http = {
         openrouter_gemini = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            env = {
-              url = "https://openrouter.ai/api",
-              api_key = "OPENROUTER_API_KEY",
-              chat_url = "/v1/chat/completions",
-            },
+          return require("codecompanion.adapters").extend("openrouter", {
             schema = {
               model = {
-                default = "google/gemini-2.5-flash",
+                default = "google/gemini-3.5-flash-lite"
+              },
+              provider = {
+                default = {
+                  allow_fallbacks = true,
+                  order = { "anthropic", "openai" },
+                  require_parameters = false,
+                },
               },
             },
           })
