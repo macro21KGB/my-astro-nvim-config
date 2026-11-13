@@ -9,5 +9,3 @@ require("mini.pick").setup()
 require("mini.move").setup()
 require("mini.icons").setup()
 require("mini.operators").setup()
-
-require("memos").setup()

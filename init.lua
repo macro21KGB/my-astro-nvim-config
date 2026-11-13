@@ -40,6 +40,5 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 
 require("typst_utils").setup()
-require "scripts"
 require "lazy_setup"
 require "polish"

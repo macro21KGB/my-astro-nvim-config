@@ -1,6 +1,8 @@
+local M = {}
+
 ---@param method string The method of the request
 ---@param url string The url to send the request
-function SendHttpRequest(method, url, headers, body)
+function M.sendhttprequest(method, url, headers, body)
   -- Start building the curl command
   local curl_cmd = "curl -s -X " .. method .. " "
 
@@ -33,3 +35,5 @@ function SendHttpRequest(method, url, headers, body)
   end
 end
 
+
+return M
